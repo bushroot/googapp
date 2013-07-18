@@ -1,10 +1,12 @@
 <html>
   <head>
-    <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    <script type="text/javascript" src="constantVariables.js"></script>
+    <script type="text/javascript" src="loadClient.js"></script>
+    <script type="text/javascript" src="getFile.js"></script>
     <script type="text/javascript">
-      var CLIENT_ID = "583952579689.apps.googleusercontent.com";
+      var CLIENT_ID = clientID;
       var SCOPES = [
-          'https://www.googleapis.com/auth/drive',
+          'https://www.googleapis.com/auth/drive'
           // Add other scopes needed by your application.
         ];
 
@@ -13,7 +15,6 @@
        */
       function handleClientLoad() {
         checkAuth();
-    	console.log("check");
 	  }
 
       /**
@@ -31,9 +32,10 @@
        * @param {Object} authResult Authorization result.
        */
       function handleAuthResult(authResult) {
-       if (authResult) {
-         //Access token has been successfully retrieved, requests can be sent to the API
-		console.log("Authentication successfull");
+        if (authResult) {
+          //Access token has been successfully retrieved, requests can be sent to the API
+		  console.log("Authentication successfull");
+          loadClient();
         } else {
           // No access token could be retrieved, force the authorization flow.
           gapi.auth.authorize(
@@ -41,12 +43,13 @@
               handleAuthResult);
         }
       }
-
-
     </script>
+   
+    <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
   </head>
   <body>
     <!-- YOUR CONTENT -->
 	my content  
-	</body>
+    <input type="button" onclick="printFile('fileID')"  value="Get Metadata" />	
+  </body>
 </html>
