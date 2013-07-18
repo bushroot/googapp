@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    <script type="text/javascript">
+      var CLIENT_ID = "583952579689.apps.googleusercontent.com";
+      var SCOPES = [
+          'https://www.googleapis.com/auth/drive',
+          // Add other scopes needed by your application.
+        ];
+
+      /**
+       * Called when the client library is loaded.
+       */
+      function handleClientLoad() {
+        checkAuth();
+    	console.log("check");
+	  }
+
+      /**
+       * Check if the current user has authorized the application.
+       */
+      function checkAuth() {
+        gapi.auth.authorize(
+            {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': true},
+            handleAuthResult);
+      }
+
+      /**
+       * Called when authorization server replies.
+       *
+       * @param {Object} authResult Authorization result.
+       */
+      function handleAuthResult(authResult) {
+       if (authResult) {
+         //Access token has been successfully retrieved, requests can be sent to the API
+		console.log("Authentication successfull");
+        } else {
+          // No access token could be retrieved, force the authorization flow.
+          gapi.auth.authorize(
+              {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': false},
+              handleAuthResult);
+        }
+      }
+
+
+    </script>
+  </head>
+  <body>
+    <!-- YOUR CONTENT -->
+	my content  
+	</body>
+</html>
